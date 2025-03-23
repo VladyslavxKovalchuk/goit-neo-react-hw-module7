@@ -1,15 +1,12 @@
 import Contact from "./Contact";
 import styles from "./css/ContactList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContacts, deleteContact } from "../redux/contactsSlice";
-import { selectNameFilter } from "../redux/filtersSlice";
+import { selectFilteredContacts } from "../redux/contactsSlice";
+import { deleteContact } from "../redux/contactsOps";
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const searchQuery = useSelector(selectNameFilter);
-  const contacts = useSelector(selectContacts).filter((contact) =>
-    contact.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const contacts = useSelector(selectFilteredContacts);
   const hasContacts = contacts.length > 0;
 
   return (
@@ -29,8 +26,6 @@ const ContactList = () => {
             </li>
           ))}
         </ul>
-      ) : !searchQuery ? (
-        <p>Your contact list is empty</p>
       ) : (
         <p>No contacts found for your search query. Please try again.</p>
       )}

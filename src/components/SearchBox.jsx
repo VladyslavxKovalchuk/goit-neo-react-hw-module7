@@ -6,10 +6,11 @@ import { selectNameFilter, changeFilter } from "../redux/filtersSlice";
 const SearchBox = () => {
   const searchBoxId = useId();
   const dispatch = useDispatch();
+  const searchQuery = useSelector(selectNameFilter);
+
   const handleChange = (value) => {
     dispatch(changeFilter(value));
   };
-  const searchQuery = useSelector(selectNameFilter);
 
   return (
     <div className={styles.searchCard}>
